@@ -121,7 +121,7 @@ h1 {
 
 .choice-area {
   position: relative;
-  width: 220px;
+  width: 260px;
   height: 95px;
   margin: 4px auto 1px;
 }
@@ -141,19 +141,44 @@ h1 {
 }
 
 .yes-button {
+  --yes-scale: 1;
   top: 26px;
-  left: 92px;
+  left: 132px;
   z-index: 1;
   background: var(--purple);
   color: #fff;
   box-shadow: 0 6px 0 var(--purple-dark);
+  transform: scale(var(--yes-scale));
+  transform-origin: center;
 }
 
 .yes-button:hover,
 .yes-button:active {
   background: #6966fa;
   box-shadow: 0 8px 0 var(--purple-dark);
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(var(--yes-scale));
+}
+
+.yes-button.is-exploding {
+  animation: yes-explode 460ms ease-in forwards;
+  pointer-events: none;
+}
+
+@keyframes yes-explode {
+  0% {
+    opacity: 1;
+    transform: scale(var(--yes-scale));
+  }
+
+  55% {
+    opacity: 1;
+    transform: scale(calc(var(--yes-scale) * 1.2)) rotate(8deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.05) rotate(45deg);
+  }
 }
 
 .yes-button span {
@@ -227,6 +252,41 @@ h1 {
   transform: rotate(3deg);
 }
 
+.confetti-layer {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 9px;
+  height: 14px;
+  border-radius: 2px;
+  animation: confetti-pop var(--duration) cubic-bezier(0.15, 0.8, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.confetti-piece.is-round {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+@keyframes confetti-pop {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.4) rotate(0deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) rotate(var(--rotation));
+  }
+}
+
 @media (max-width: 370px) {
   .question-card {
     width: calc(100vw - 28px);
@@ -259,7 +319,9 @@ h1 {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .choice-button {
+  .choice-button,
+  .confetti-piece {
     transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
   }
 }
