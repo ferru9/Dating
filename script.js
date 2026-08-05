@@ -1,36 +1,30 @@
 const recipient = "ferferru2002@gmail.com";
-const form = document.querySelector("#date-form");
-const dateInput = document.querySelector("#date");
+const choiceArea = document.querySelector("#choice-area");
 const noButton = document.querySelector("#no-button");
-const actions = document.querySelector("#actions");
-const formMessage = document.querySelector("#form-message");
-
-const today = new Date();
-const localToday = new Date(today.getTime() - today.getTimezoneOffset() * 60000)
-  .toISOString()
-  .split("T")[0];
-
-dateInput.min = localToday;
+const yesButton = document.querySelector("#yes-button");
+const feedback = document.querySelector("#feedback");
 
 const noMessages = [
-  "no is feeling a little shy",
-  "that button has commitment issues",
-  "try the other one — it is nicer",
-  "the no button is running its own algorithm",
+  "ok ya, di que sí 🥰",
+  "ese botón no quiere colaborar 😭",
+  "el no está en modo difícil",
+  "inténtalo otra vez, cobarde xd",
 ];
 
 let noAttempts = 0;
 
 function moveNoButton() {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const areaWidth = choiceArea.clientWidth;
+  const areaHeight = choiceArea.clientHeight;
+  const buttonWidth = noButton.offsetWidth;
+  const buttonHeight = noButton.offsetHeight;
+  const maxX = Math.max(0, areaWidth - buttonWidth - 4);
+  const maxY = Math.max(0, areaHeight - buttonHeight - 4);
+  const x = Math.round(Math.random() * maxX);
+  const y = Math.round(Math.random() * maxY);
 
-  const maxX = Math.max(12, Math.min(120, actions.clientWidth * 0.42));
-  const maxY = 30;
-  const x = Math.round((Math.random() * 2 - 1) * maxX);
-  const y = Math.round((Math.random() * 2 - 1) * maxY);
-
-  noButton.style.transform = `translate(${x}px, ${y}px)`;
-  formMessage.textContent = noMessages[noAttempts % noMessages.length];
+  noButton.style.transform = `translate(${x - 15}px, ${y - 4}px)`;
+  feedback.textContent = noMessages[noAttempts % noMessages.length];
   noAttempts += 1;
 }
 
@@ -40,36 +34,22 @@ noButton.addEventListener("pointerdown", (event) => {
   moveNoButton();
 });
 
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-
-  const data = new FormData(form);
-  const date = new Date(`${data.get("date")}T${data.get("time")}`);
-  const readableDate = new Intl.DateTimeFormat("en", {
-    weekday: "long",
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  }).format(date);
-  const readableTime = new Intl.DateTimeFormat("en", {
-    hour: "numeric",
-    minute: "2-digit",
-  }).format(date);
-  const plan = data.get("plan");
-
-  const subject = "date_request.exe says: it’s a date 💌";
+yesButton.addEventListener("click", () => {
+  const answeredAt = new Intl.DateTimeFormat("es", {
+    dateStyle: "full",
+    timeStyle: "short",
+  }).format(new Date());
+  const subject = "dijo que sí 💌";
   const body = [
-    "Hi!",
+    "¡Sí! 💌",
     "",
-    "I’m saying yes 💌",
-    `Date: ${readableDate}`,
-    `Time: ${readableTime}`,
-    `Plan: ${plan}`,
+    `Respondido el: ${answeredAt}`,
     "",
-    "See you then?",
+    "Ahora solo falta elegir la fecha de la cita. 🗓️",
   ].join("\n");
 
-  formMessage.textContent = "opening your email app… see you on the date 💌";
-  formMessage.classList.add("is-success");
+  feedback.textContent = "abriendo el email… 💌";
+  feedback.classList.add("is-success");
+  yesButton.textContent = "sí 💌";
   window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 });
