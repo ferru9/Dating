@@ -16,15 +16,6 @@ let lastPosition = { left: -1, top: -1 };
 let yesClicks = 0;
 const explosionAt = 5;
 
-function overlaps(first, second, gap = 4) {
-  return (
-    first.left < second.right + gap &&
-    first.right + gap > second.left &&
-    first.top < second.bottom + gap &&
-    first.bottom + gap > second.top
-  );
-}
-
 function moveNoButton() {
   const areaWidth = choiceArea.clientWidth;
   const areaHeight = choiceArea.clientHeight;
@@ -34,39 +25,16 @@ function moveNoButton() {
   const baseTop = noButton.offsetTop;
   const maxLeft = Math.max(baseLeft, areaWidth - buttonWidth - 8);
   const maxTop = Math.max(baseTop, areaHeight - buttonHeight - 8);
-  const areaRect = choiceArea.getBoundingClientRect();
-  const visibleYesRect = yesButton.getBoundingClientRect();
-  const yesRect = {
-    left: visibleYesRect.left - areaRect.left,
-    top: visibleYesRect.top - areaRect.top,
-    right: visibleYesRect.right - areaRect.left,
-    bottom: visibleYesRect.bottom - areaRect.top,
-  };
   let left = baseLeft;
   let top = baseTop;
-  let foundPosition = false;
 
-  for (let attempt = 0; attempt < 80; attempt += 1) {
+  for (let attempt = 0; attempt < 20; attempt += 1) {
     left = Math.round(baseLeft + Math.random() * (maxLeft - baseLeft));
     top = Math.round(baseTop + Math.random() * (maxTop - baseTop));
-    const candidate = {
-      left,
-      top,
-      right: left + buttonWidth,
-      bottom: top + buttonHeight,
-    };
     const movedEnough =
       Math.abs(left - lastPosition.left) > 22 || Math.abs(top - lastPosition.top) > 14;
 
-    if (movedEnough && !overlaps(candidate, yesRect)) {
-      foundPosition = true;
-      break;
-    }
-  }
-
-  if (!foundPosition) {
-    left = Math.max(0, Math.min(maxLeft, yesRect.left - buttonWidth - 5));
-    top = baseTop;
+    if (movedEnough) break;
   }
 
   lastPosition = { left, top };
