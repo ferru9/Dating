@@ -12,27 +12,42 @@ const noMessages = [
 ];
 
 let noAttempts = 0;
+let lastPosition = { x: -1, y: -1 };
 
 function moveNoButton() {
   const areaWidth = choiceArea.clientWidth;
   const areaHeight = choiceArea.clientHeight;
   const buttonWidth = noButton.offsetWidth;
   const buttonHeight = noButton.offsetHeight;
-  const maxX = Math.max(0, areaWidth - buttonWidth - 4);
-  const maxY = Math.max(0, areaHeight - buttonHeight - 4);
-  const x = Math.round(Math.random() * maxX);
-  const y = Math.round(Math.random() * maxY);
+  const baseX = noButton.offsetLeft;
+  const baseY = noButton.offsetTop;
+  const maxX = Math.max(0, areaWidth - buttonWidth - 8 - baseX);
+  const maxY = Math.max(0, areaHeight - buttonHeight - 8 - baseY);
+  let x = 0;
+  let y = 0;
 
-  noButton.style.transform = `translate(${x - 15}px, ${y - 4}px)`;
+  for (let attempt = 0; attempt < 12; attempt += 1) {
+    x = Math.round(Math.random() * maxX);
+    y = Math.round(Math.random() * maxY);
+    if (Math.abs(x - lastPosition.x) > 28 || Math.abs(y - lastPosition.y) > 18) break;
+  }
+
+  lastPosition = { x, y };
+
+  noButton.style.transform = `translate(${x}px, ${y}px)`;
   feedback.textContent = noMessages[noAttempts % noMessages.length];
   noAttempts += 1;
 }
 
-noButton.addEventListener("pointerenter", moveNoButton);
-noButton.addEventListener("pointerdown", (event) => {
+function dodge(event) {
   event.preventDefault();
   moveNoButton();
-});
+}
+
+noButton.addEventListener("pointerenter", moveNoButton);
+noButton.addEventListener("pointerdown", dodge);
+noButton.addEventListener("touchstart", dodge, { passive: false });
+noButton.addEventListener("click", dodge);
 
 yesButton.addEventListener("click", () => {
   const answeredAt = new Intl.DateTimeFormat("es", {

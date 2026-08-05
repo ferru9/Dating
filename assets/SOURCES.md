@@ -1,7 +1,5 @@
 # Stickers
 
-Los dos stickers vienen de [Openclipart](https://openclipart.org/), cuyos
-recursos se publican en el dominio público mediante CC0:
-
-- [Sad Cat](https://openclipart.org/detail/332405/sad-cat)
-- [Gray Anthropomorphic Cat](https://openclipart.org/detail/270676/gray-anthropomorphic-cat)
+Los stickers de `cat-sad.png` y `cat-happy.png` son recortes sin fondo de las
+fotos que están en la raíz del proyecto. Se conservaron las fotos originales
+sin modificar.

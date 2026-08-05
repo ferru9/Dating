@@ -1,10 +1,10 @@
 :root {
-  --ink: #182235;
-  --purple: #5b57ef;
-  --purple-dark: #302ca7;
-  --cream: #f8f8ef;
-  --yellow: #f4da74;
-  --muted: #8d95b7;
+  --ink: #15213e;
+  --purple: #5d5af1;
+  --purple-dark: #3937b7;
+  --card: #f7f8ee;
+  --yellow: #f5d96f;
+  --muted: #8d96bc;
 }
 
 * {
@@ -13,20 +13,19 @@
 
 html,
 body {
+  width: 100%;
   min-width: 320px;
+  height: 100%;
   min-height: 100%;
   margin: 0;
 }
 
 body {
   min-height: 100svh;
-  display: grid;
-  place-items: center;
-  padding: 24px;
   overflow: hidden;
   color: var(--ink);
-  background: #080d12;
-  font-family: "Trebuchet MS", Arial, sans-serif;
+  background: #090d14;
+  font-family: "Chalkboard SE", "Comic Sans MS", "Segoe Print", cursive;
 }
 
 button {
@@ -42,48 +41,40 @@ button:focus-visible {
 .stage {
   position: relative;
   display: grid;
-  width: min(100%, 1080px);
-  min-height: min(760px, calc(100svh - 48px));
+  grid-template-columns: minmax(0, 1fr);
+  width: 100%;
+  height: 100svh;
+  min-height: 520px;
   place-items: center;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.13);
   background:
-    radial-gradient(circle at 50% 49%, rgba(124, 117, 255, 0.95) 0 6%, transparent 42%),
-    radial-gradient(circle at 17% 88%, rgba(51, 39, 192, 0.8), transparent 45%),
-    linear-gradient(145deg, #302bbd 0%, #413ce1 53%, #6760fa 100%);
-  box-shadow: inset 0 0 90px rgba(15, 13, 111, 0.34);
-}
-
-.stage::before,
-.stage::after {
-  position: absolute;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 50%;
-  content: "";
-  pointer-events: none;
+    radial-gradient(circle at 50% 48%, rgba(107, 104, 255, 0.94) 0 8%, transparent 52%),
+    linear-gradient(164deg, #3634ce 0%, #4141dc 56%, #605cf3 100%);
 }
 
 .stage::before {
-  width: 560px;
-  height: 560px;
-  box-shadow: 0 0 90px rgba(162, 157, 255, 0.35);
-}
-
-.stage::after {
-  width: 790px;
-  height: 790px;
+  position: absolute;
+  width: min(100vw, 850px);
+  height: min(100vw, 850px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 50%;
+  box-shadow: 0 0 90px rgba(164, 160, 255, 0.2);
+  content: "";
+  pointer-events: none;
 }
 
 .question-card {
   position: relative;
   z-index: 1;
-  width: min(390px, calc(100% - 42px));
-  min-height: 325px;
-  padding: 30px 28px 27px;
+  width: min(86vw, 386px);
+  max-width: calc(100% - 28px);
+  min-width: 0;
+  min-height: 346px;
+  padding: 30px 18px 25px;
   border: 2px solid var(--ink);
-  border-radius: 25px;
-  background: var(--cream);
-  box-shadow: 0 17px 0 rgba(76, 73, 214, 0.82), 0 28px 32px rgba(19, 16, 105, 0.28);
+  border-radius: 21px;
+  background: var(--card);
+  box-shadow: 0 18px 0 #5b58e2, 0 27px 34px rgba(22, 19, 115, 0.28);
   text-align: center;
 }
 
@@ -94,113 +85,119 @@ button:focus-visible {
   margin-left: auto;
   border: 2px solid var(--ink);
   border-radius: 999px;
+  font-family: Arial, sans-serif;
   font-weight: 700;
-  text-transform: uppercase;
 }
 
 .serious-pill {
   margin-top: 0;
-  margin-bottom: 15px;
-  padding: 5px 13px 4px;
+  margin-bottom: 14px;
+  padding: 5px 11px 4px;
   background: var(--yellow);
-  font-size: 0.62rem;
-  letter-spacing: 0.04em;
+  font-size: 0.58rem;
+  letter-spacing: 0.035em;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 h1 {
-  max-width: 320px;
+  max-width: 100%;
   margin: 0 auto;
-  font-family: "Comic Sans MS", "Segoe Print", "Bradley Hand", cursive;
-  font-size: clamp(1.65rem, 5vw, 2rem);
-  font-weight: 700;
-  letter-spacing: -0.055em;
-  line-height: 1.05;
+  overflow: visible;
+  font-family: "Comic Sans MS", "Chalkboard SE", "Segoe Print", cursive;
+  font-size: clamp(1.12rem, 5.4vw, 1.62rem);
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  line-height: 1.08;
+  white-space: nowrap;
 }
 
 .choice-label {
-  margin: 8px 0 0;
-  color: #7681ab;
-  font-family: "Comic Sans MS", "Segoe Print", cursive;
-  font-size: 0.92rem;
+  margin: 6px 0 0;
+  color: #7b86b2;
+  font-size: 0.82rem;
+  line-height: 1;
 }
 
 .choice-area {
   position: relative;
-  width: 190px;
-  height: 82px;
-  margin: 5px auto 4px;
+  width: 220px;
+  height: 95px;
+  margin: 4px auto 1px;
 }
 
 .choice-button {
   position: absolute;
-  min-width: 76px;
+  min-width: 77px;
   height: 52px;
-  padding: 0 18px;
+  padding: 0 17px;
   border: 2px solid var(--ink);
   border-radius: 18px;
   cursor: pointer;
-  font-family: "Comic Sans MS", "Segoe Print", cursive;
   font-size: 0.9rem;
   font-weight: 700;
-  transition: transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 160ms ease, background 160ms ease;
+  touch-action: none;
+  transition: transform 160ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 160ms ease, background 160ms ease;
 }
 
 .yes-button {
-  top: 22px;
-  left: 77px;
+  top: 26px;
+  left: 92px;
   z-index: 1;
   background: var(--purple);
-  color: white;
+  color: #fff;
   box-shadow: 0 6px 0 var(--purple-dark);
 }
 
-.yes-button:hover {
-  background: #6d68ff;
+.yes-button:hover,
+.yes-button:active {
+  background: #6966fa;
   box-shadow: 0 8px 0 var(--purple-dark);
   transform: translateY(-2px);
 }
 
 .yes-button span {
   display: inline-block;
-  margin-left: 4px;
-  font-size: 1rem;
+  margin-left: 3px;
+  font-size: 0.95rem;
 }
 
 .no-button {
-  top: 4px;
-  left: 15px;
+  top: 7px;
+  left: 20px;
   z-index: 2;
-  background: var(--cream);
+  background: var(--card);
   color: var(--ink);
 }
 
 .no-button:hover {
-  background: #fffdf7;
+  background: #fffef9;
 }
 
 .situation-pill {
-  margin-top: 1px;
+  margin-top: 0;
   margin-bottom: 12px;
-  padding: 6px 13px 5px;
+  padding: 5px 12px 4px;
   border-color: #10192b;
   background: #10192b;
-  color: white;
-  font-family: "Comic Sans MS", "Segoe Print", cursive;
-  font-size: 0.62rem;
+  color: #fff;
+  font-family: "Chalkboard SE", "Comic Sans MS", "Segoe Print", cursive;
+  font-size: 0.61rem;
   letter-spacing: 0;
+  line-height: 1.15;
   text-transform: none;
 }
 
 .feedback {
-  min-height: 18px;
+  min-height: 17px;
   margin: 0;
   color: var(--muted);
-  font-family: "Comic Sans MS", "Segoe Print", cursive;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
+  line-height: 1;
 }
 
 .feedback.is-success {
-  color: #5d61bd;
+  color: #5e62bb;
 }
 
 .cat-sticker {
@@ -208,48 +205,61 @@ h1 {
   z-index: 4;
   display: block;
   object-fit: contain;
-  line-height: 1;
-  filter: drop-shadow(2px 5px 0 rgba(24, 34, 53, 0.18));
+  filter: drop-shadow(2px 5px 0 rgba(21, 33, 62, 0.18));
   pointer-events: none;
   user-select: none;
 }
 
 .cat-sad {
-  top: -66px;
-  left: -38px;
-  width: 122px;
-  height: 115px;
-  transform: rotate(-7deg);
+  top: -78px;
+  left: -32px;
+  width: 140px;
+  height: 180px;
+  clip-path: inset(0 0 38% 0);
+  transform: rotate(-2deg);
 }
 
 .cat-happy {
-  right: -48px;
-  bottom: -61px;
-  width: 122px;
-  height: 148px;
-  transform: rotate(8deg);
+  right: -35px;
+  bottom: -30px;
+  width: 112px;
+  height: 112px;
+  transform: rotate(3deg);
 }
 
-@media (max-width: 560px) {
-  body {
-    padding: 0;
-  }
-
-  .stage {
-    width: 100%;
-    min-height: 100svh;
-    border: 0;
-  }
-
+@media (max-width: 370px) {
   .question-card {
-    width: min(390px, calc(100% - 34px));
+    width: calc(100vw - 28px);
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+
+  h1 {
+    font-size: 1.08rem;
+  }
+
+  .cat-sad {
+    top: -68px;
+    left: -23px;
+    width: 118px;
+    height: 152px;
+  }
+
+  .cat-happy {
+    right: -26px;
+    width: 98px;
+    height: 98px;
+  }
+}
+
+@media (min-width: 371px) and (max-width: 560px) {
+  h1 {
+    font-size: 1.18rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  .choice-button {
     transition-duration: 0.01ms !important;
   }
 }
