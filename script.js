@@ -3,6 +3,7 @@ const noButton = document.querySelector("#no-button");
 const yesButton = document.querySelector("#yes-button");
 const feedback = document.querySelector("#feedback");
 const confettiLayer = document.querySelector("#confetti-layer");
+const reactionOverlay = document.querySelector("#reaction-overlay");
 const reactionImage = document.querySelector("#reaction-image");
 
 const noMessages = [
@@ -102,9 +103,9 @@ function growYes() {
 }
 
 function showReactionImage() {
-  reactionImage.hidden = false;
-  reactionImage.setAttribute("aria-hidden", "false");
-  requestAnimationFrame(() => reactionImage.classList.add("is-visible"));
+  reactionOverlay.hidden = false;
+  reactionOverlay.setAttribute("aria-hidden", "false");
+  requestAnimationFrame(() => reactionOverlay.classList.add("is-visible"));
 }
 
 yesButton.addEventListener("click", () => {
