@@ -13,7 +13,7 @@ const noMessages = [
 
 let noAttempts = 0;
 let lastPosition = { left: -1, top: -1 };
-let yesClicks = 0;
+let yesGrowths = 0;
 const explosionAt = 5;
 
 function moveNoButton() {
@@ -46,12 +46,13 @@ function moveNoButton() {
 
 function dodge(event) {
   event.preventDefault();
+  if (event.type === "click" && event.detail > 0) return;
+  growYes();
   moveNoButton();
 }
 
 noButton.addEventListener("pointerenter", moveNoButton);
 noButton.addEventListener("pointerdown", dodge);
-noButton.addEventListener("touchstart", dodge, { passive: false });
 noButton.addEventListener("click", dodge);
 
 function launchConfetti(pieceCount = 42) {
@@ -79,12 +80,11 @@ function launchConfetti(pieceCount = 42) {
   }
 }
 
-function handleYesClick() {
-  yesClicks += 1;
+function growYes() {
+  yesGrowths += 1;
 
-  if (yesClicks < explosionAt) {
-    yesButton.style.setProperty("--yes-scale", `${1 + yesClicks * 0.17}`);
-    launchConfetti(24 + yesClicks * 4);
+  if (yesGrowths < explosionAt) {
+    yesButton.style.setProperty("--yes-scale", `${1 + yesGrowths * 0.17}`);
     return;
   }
 
@@ -92,10 +92,13 @@ function handleYesClick() {
   launchConfetti(90);
 
   window.setTimeout(() => {
-    yesClicks = 0;
+    yesGrowths = 0;
     yesButton.classList.remove("is-exploding");
     yesButton.style.setProperty("--yes-scale", "1");
   }, 650);
 }
 
-yesButton.addEventListener("click", handleYesClick);
+yesButton.addEventListener("click", () => {
+  growYes();
+  launchConfetti(24);
+});
