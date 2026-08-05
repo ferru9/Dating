@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4eadb" />
+    <meta
+      name="description"
+      content="A tiny, slightly nerdy invitation for one very important date."
+    />
+    <title>date_request.exe</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="." aria-label="Date request home">
+          <span class="brand-mark">&lt;3</span>
+          <span>date_request.exe</span>
+        </a>
+
+        <p class="topbar-note"><span class="status-dot"></span> a very important question</p>
+      </header>
+
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow">01 / open invitation</p>
+
+          <h1 id="page-title">
+            Would you like to
+            <span>go out with me?</span>
+          </h1>
+
+          <p class="intro">
+            I made you a tiny website because asking in person would require
+            significantly more courage.
+          </p>
+
+          <div class="code-note" aria-label="A little piece of code">
+            <span class="code-line"><i>const</i> perfectDate = <b>you</b>;</span>
+            <span class="code-line"><i>return</i> perfectDate ? <b>"yes"</b> : <em>tryAgain()</em>;</span>
+          </div>
+
+          <div class="hero-footer">
+            <span>made with questionable confidence</span>
+            <span class="heart" aria-hidden="true">♥</span>
+          </div>
+        </div>
+
+        <div class="invite-wrap">
+          <div class="sticker sticker-top" aria-hidden="true">new<br />message!</div>
+          <div class="sticker sticker-bottom" aria-hidden="true">no pressure<br />(just vibes)</div>
+
+          <section class="invite-card" aria-label="Date invite form">
+            <div class="card-head">
+              <span class="file-icon">♥</span>
+              <div>
+                <p class="card-kicker">DATE_REQUEST</p>
+                <p class="card-subtitle">a soft launch for us</p>
+              </div>
+              <span class="window-dots" aria-hidden="true">•••</span>
+            </div>
+
+            <div class="recipient">
+              <span>to:</span>
+              <strong>ferferru2002@gmail.com</strong>
+            </div>
+
+            <div class="question-block">
+              <span class="prompt">&gt; choose a moment</span>
+              <p>When should we make this official?</p>
+            </div>
+
+            <form id="date-form">
+              <div class="field-row">
+                <label class="field">
+                  <span>date</span>
+                  <input id="date" name="date" type="date" required />
+                </label>
+                <label class="field">
+                  <span>time</span>
+                  <input id="time" name="time" type="time" required />
+                </label>
+              </div>
+
+              <label class="field">
+                <span>the plan</span>
+                <select id="plan" name="plan">
+                  <option value="coffee + a walk">coffee + a walk</option>
+                  <option value="dinner and dessert">dinner and dessert</option>
+                  <option value="something delightfully random">something delightfully random</option>
+                </select>
+              </label>
+
+              <div class="actions" id="actions">
+                <button class="yes-button" type="submit">yes, let’s go <span>↗</span></button>
+                <button class="no-button" id="no-button" type="button">no</button>
+              </div>
+
+              <p class="form-message" id="form-message" role="status" aria-live="polite">
+                your answer opens a ready-to-send email
+              </p>
+            </form>
+          </section>
+        </div>
+      </section>
+
+      <footer class="bottom-bar">
+        <span>built for one specific person</span>
+        <span>scrolling is optional <span aria-hidden="true">↓</span></span>
+      </footer>
+    </main>
+  </body>
+</html>
