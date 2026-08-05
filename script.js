@@ -86,7 +86,7 @@ function growYes() {
 
   if (yesGrowths < explosionAt) {
     yesButton.style.setProperty("--yes-scale", `${1 + yesGrowths * 0.17}`);
-    return;
+    return false;
   }
 
   yesButton.classList.add("is-exploding");
@@ -97,6 +97,8 @@ function growYes() {
     yesButton.classList.remove("is-exploding");
     yesButton.style.setProperty("--yes-scale", "1");
   }, 650);
+
+  return true;
 }
 
 function showReactionImage() {
@@ -106,7 +108,10 @@ function showReactionImage() {
 }
 
 yesButton.addEventListener("click", () => {
-  growYes();
+  const exploded = growYes();
   launchConfetti(24);
-  showReactionImage();
+
+  if (exploded) {
+    window.setTimeout(showReactionImage, 660);
+  }
 });
