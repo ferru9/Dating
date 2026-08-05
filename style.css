@@ -225,6 +225,26 @@ h1 {
   color: #5e62bb;
 }
 
+.reaction-image {
+  display: none;
+  width: min(100%, 285px);
+  height: min(285px, 32svh);
+  margin: 18px auto 0;
+  border: 2px solid var(--ink);
+  border-radius: 15px;
+  box-shadow: 0 7px 0 #5b58e2;
+  object-fit: cover;
+  opacity: 0;
+  transform: translateY(10px) scale(0.96);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.reaction-image.is-visible {
+  display: block;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
 .cat-sticker {
   position: absolute;
   z-index: 4;

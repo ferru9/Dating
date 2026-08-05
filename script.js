@@ -3,6 +3,7 @@ const noButton = document.querySelector("#no-button");
 const yesButton = document.querySelector("#yes-button");
 const feedback = document.querySelector("#feedback");
 const confettiLayer = document.querySelector("#confetti-layer");
+const reactionImage = document.querySelector("#reaction-image");
 
 const noMessages = [
   "ok ya, di que sí 🥰",
@@ -98,7 +99,14 @@ function growYes() {
   }, 650);
 }
 
+function showReactionImage() {
+  reactionImage.hidden = false;
+  reactionImage.setAttribute("aria-hidden", "false");
+  requestAnimationFrame(() => reactionImage.classList.add("is-visible"));
+}
+
 yesButton.addEventListener("click", () => {
   growYes();
   launchConfetti(24);
+  showReactionImage();
 });
